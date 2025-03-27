@@ -18,7 +18,7 @@ resource "aws_vpc_security_group_ingress_rule" "allow_ssh" {
 
 resource "aws_vpc_security_group_ingress_rule" "allow_tls_ipv4" {
   security_group_id = aws_security_group.tool.id
-  cidr_ipv6         = "0.0.0.0/0"
+  cidr_ipv4         = "0.0.0.0/0"
   from_port         = var.port
   ip_protocol       = "tcp"
   to_port           = var.port
