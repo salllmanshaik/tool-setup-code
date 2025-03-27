@@ -24,7 +24,7 @@ resource "vault_mount" "ssh" {
 }
 
 resource "vault_generic_secret" "ssh" {
-  path = "${vault_mount.ssh.path}/secrets"
+  path = "${vault_mount.ssh.path}/ssh"
 
   data_json = <<EOT
 {
