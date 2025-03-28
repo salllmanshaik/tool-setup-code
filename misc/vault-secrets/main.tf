@@ -33,3 +33,21 @@ resource "vault_generic_secret" "ssh" {
 }
 EOT
 }
+
+resource "vault_mount" "roboshop-dev" {
+  path        = "roboshop-dev"
+  type        = "kv"
+  options     = { version = "2" }
+  description = "Roboshop Dev secrets"
+}
+
+resource "vault_generic_secret" "roboshop-dev-cart" {
+  path = "${vault_mount.roboshop-dev.path}/cart"
+
+  data_json = <<EOT
+{
+  "username":   "ec2-user",
+  "password": "DevOps321"
+}
+EOT
+}
