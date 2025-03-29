@@ -58,7 +58,7 @@ resource "vault_generic_secret" "roboshop-dev-catalogue" {
 
   data_json = <<EOT
 {
-  "MONGO": "true"
+  "MONGO": "true",
   "MONGO_URL": "mongodb://mongodb-dev.salman06.shop:27017/catalogue"
 }
 EOT
