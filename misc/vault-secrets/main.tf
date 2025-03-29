@@ -52,3 +52,95 @@ resource "vault_generic_secret" "roboshop-dev-cart" {
 }
 EOT
 }
+
+resource "vault_generic_secret" "roboshop-dev-catalogue" {
+  path = "${vault_mount.roboshop-dev.path}/catalogue"
+
+  data_json = <<EOT
+{
+  "MONGO": "true"
+  "MONGO_URL":   "mongodb://mongodb-dev.salman06.shop:27017/catalogue"
+}
+EOT
+}
+
+
+resource "vault_generic_secret" "roboshop-dev-catalogue" {
+  path = "${vault_mount.roboshop-dev.path}/catalogue"
+
+  data_json = <<EOT
+{
+  "catalogue_url":  http://catalogue-dev.salman06.shop:8080/
+  "user_url":  http://user-dev.salman06.shop:8080/
+  "cart_url":  http://cart-dev.salman06.shop:8080/
+  "shipping_url":  http://shipping-dev.salman06.shop:8080/
+  "payment_url":  http://payment-dev.salman06.shop:8080/
+}
+EOT
+}
+
+
+
+
+resource "vault_generic_secret" "roboshop-dev-frontend" {
+  path = "${vault_mount.roboshop-dev.path}/frontend"
+
+  data_json = <<EOT
+{
+"catalogue":   "http://catalogue-dev.salman06.shop:8080/",
+"user":   "http://user-dev.salman06.shop:8080/",
+"cart":   "http://cart-dev.salman06.shop:8080/",
+"shipping":   "http://shipping-dev.salman06.shop:8080/",
+"payment":   "http://payment-dev.salman06.shop:8080/",
+"CATALOGUE_HOST" : "catalogue-dev.salman06.shop",
+"CATALOGUE_PORT" : "8080",
+"USER_HOST" : "user-dev.salman06.shop",
+"USER_PORT" : "8080",
+"CART_HOST" : "cart-dev.salman06.shop",
+"CART_PORT" : "8080",
+"SHIPPING_HOST" : "shipping-dev.salman06.shop",
+"SHIPPING_PORT" : "8080",
+"PAYMENT_HOST" : "payment-dev.salman06.shop",
+"PAYMENT_PORT" : "8080"
+}
+EOT
+}
+
+resource "vault_generic_secret" "roboshop-dev-payment" {
+  path = "${vault_mount.roboshop-dev.path}/payment"
+
+  data_json = <<EOT
+{
+"CART_HOST" : "cart-dev.salman06.shop",
+"CART_PORT" : 8080,
+"USER_HOST" : "user-dev.salman06.shop",
+"USER_PORT" : 8080,
+"AMQP_HOST" : "rabbitmq-dev.salman06.shop",
+"AMQP_USER" : "roboshop",
+"AMQP_PASS" : "roboshop123"
+}
+EOT
+}
+
+resource "vault_generic_secret" "roboshop-dev-shipping" {
+  path = "${vault_mount.roboshop-dev.path}/shipping"
+
+  data_json = <<EOT
+{
+"CART_ENDPOINT" : "cart-dev.salman06.shop:8080",
+"DB_HOST" : "mysql-dev.salman06.shop",
+}
+EOT
+}
+
+resource "vault_generic_secret" "roboshop-dev-user" {
+  path = "${vault_mount.roboshop-dev.path}/user"
+
+  data_json = <<EOT
+{
+"MONGO" : "true",
+"REDIS_URL" : "redis://redis-dev.salman06.shop:6379",
+"MONGO_URL" : "mongodb://mongodb-dev.salman06.shop:27017/users"
+}
+EOT
+}
