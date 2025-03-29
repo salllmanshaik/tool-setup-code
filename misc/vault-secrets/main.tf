@@ -65,19 +65,6 @@ EOT
 }
 
 
-resource "vault_generic_secret" "roboshop-dev-catalogue" {
-  path = "${vault_mount.roboshop-dev.path}/catalogue"
-
-  data_json = <<EOT
-{
-  "catalogue_url":  http://catalogue-dev.salman06.shop:8080/
-  "user_url":  http://user-dev.salman06.shop:8080/
-  "cart_url":  http://cart-dev.salman06.shop:8080/
-  "shipping_url":  http://shipping-dev.salman06.shop:8080/
-  "payment_url":  http://payment-dev.salman06.shop:8080/
-}
-EOT
-}
 
 
 
