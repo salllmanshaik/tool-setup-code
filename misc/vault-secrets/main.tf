@@ -94,7 +94,7 @@ EOT
 }
 
 resource "vault_generic_secret" "roboshop-dev-payment" {
-  path : "${vault_mount.roboshop-dev.path}/payment"
+  path = "${vault_mount.roboshop-dev.path}/payment"
 
   data_json = <<EOT
 {
