@@ -31,7 +31,7 @@
     state: installed
 
 - name: Configure github runner
-  ansible.builtin.shell: ./config.sh --url https://github.com/salllmanshaik06 --token {{ lookup('community.hashi_vault.hashi_vault', 'secret=infra/data/github-runner:RUNNER_TOKEN token={{ vault_token }} url=http://vault-internal.salman06.shop:8200') }}
+  ansible.builtin.shell: ./config.sh --url https://github.com/salllmanshaik06 --token {{ lookup('community.hashi_vault.hashi_vault', 'secret=infra/data/github-runner:RUNNER_TOKEN token={{ vault_token }} url=http://vault-internal.salman06.shop:8200') }} --unattended
   args:
     chdir: /actions-runner
   become_user: github
