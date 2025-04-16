@@ -20,7 +20,7 @@
     group: github
     remote_src: yes
 
-- name: Install bottle for Python 3.3 specifically, using the 'pip3.3' executable
+- name: Install hvac
   ansible.builtin.pip:
     name: hvac
     executable: pip3.11
