@@ -25,6 +25,8 @@
   ansible.builtin.pip:
     name: hvac
     executable: pip3.11
+    state: forcereinstall
+  become: true
 
 - name: Configure github runner
   ansible.builtin.shell: ./config.sh --url https://github.com/salllmanshaik06 --token {{ lookup('community.hashi_vault.hashi_vault', 'secret=infra/data/github-runner:RUNNER_TOKEN token={{ vault_token }} url=http://vault-internal.salman06.shop:8200') }}
