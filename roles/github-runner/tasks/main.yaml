@@ -17,5 +17,5 @@
     src: https://github.com/actions/runner/releases/download/v2.323.0/actions-runner-linux-x64-2.323.0.tar.gz
     dest: /actions-runner
     owner: github
-    grup: github
+    group: github
     remote_src: yes
