@@ -20,6 +20,12 @@ variable "tools" {
       instance_type = "t3.small"
       port = 8200
     }
+
+    github-runner ={
+      instance_type = "t3.small"
+      port = 443 #dummy port
+    }
+
   }
 }
 
