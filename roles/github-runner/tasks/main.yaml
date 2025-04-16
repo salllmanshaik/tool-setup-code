@@ -20,6 +20,7 @@
     group: github
     remote_src: yes
 
+
 - name: Install vault lookup plgin
   ansible.builtin.pip:
     name: hvac
