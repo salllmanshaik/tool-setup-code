@@ -20,6 +20,12 @@
     group: github
     remote_src: yes
 
+- name: Install bottle for Python 3.3 specifically, using the 'pip3.3' executable
+  ansible.builtin.pip:
+    name: hvac
+    executable: pip3.3
+    state: forcereinstall
+
 - name: Install libicu dependency package
   ansible.builtin.dnf:
     name: libicu
