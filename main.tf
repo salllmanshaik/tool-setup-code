@@ -39,6 +39,4 @@ module "tool-infra" {
   name              = each.key
   port              = each.value["port"]
   zone_id           = var.zone_id
-
-
 }
