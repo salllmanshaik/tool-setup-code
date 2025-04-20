@@ -15,6 +15,7 @@
   ansible.builtin.file:
     path: /actions-runner
     state: directory
+    recurse: yes
     owner: github
     group: github
 
