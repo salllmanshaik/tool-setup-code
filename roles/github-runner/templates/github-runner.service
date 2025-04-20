@@ -4,7 +4,7 @@ After=network.target
 
 [Service]
 ExecStart=/actions-runner/runsvc.sh
-User=github
+User=ec2-user
 WorkingDirectory=/actions-runner
 KillMode=process
 KillSignal=SIGTERM
@@ -12,3 +12,4 @@ TimeoutStopSec=5min
 
 [Install]
 WantedBy=multi-user.target
+
