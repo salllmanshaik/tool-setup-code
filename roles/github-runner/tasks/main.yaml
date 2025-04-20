@@ -52,7 +52,7 @@
 
 - name: Start github runner service
   ansible.builtin.systemd_service:
-    name: github-runner
+    name: run
     state: started
     enabled: yes
     daemon-reload: yes                                    
