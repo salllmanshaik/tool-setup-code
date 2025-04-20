@@ -15,7 +15,6 @@
   ansible.builtin.file:
     path: /actions-runner
     state: directory
-    recurse: yes
     owner: github
     group: github
 
@@ -26,7 +25,6 @@
     owner: github
     group: github
     remote_src: yes
-    mode: '0755'
 
 
 - name: Install libicu dependency package
@@ -43,6 +41,7 @@
   ansible.builtin.shell: ./config.sh --url https://github.com/salllman06shaik --token {{ lookup('community.hashi_vault.hashi_vault', 'secret=infra/data/github-runner:RUNNER_TOKEN token={{ vault_token }} url=http://vault-internal.salman06.shop:8200') }} --unattended
   args:
     chdir: /actions-runner
+  become: yes
   become_user: github
   when: not runner_stat.stat.exists
 
