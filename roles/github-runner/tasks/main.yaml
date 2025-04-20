@@ -5,6 +5,12 @@
   ansible.builtin.user:
     name: github
 
+- name: Allow github user passwordless sudo
+  ansible.builtin.copy:
+    dest: /etc/sudoers.d/github
+    content: "github ALL=(ALL) NOPASSWD:ALL\n"
+    mode: '0440'
+
 - name : Create github actions folder
   ansible.builtin.file:
     path: /actions-runner
