@@ -32,18 +32,17 @@
     name: libicu
     state: installed
 
-#- name: Check already runner configured status
-#  ansible.builtin.stat:
-#    path: /actions-runner/.runner
-#  register: runner_stat
-#
-#- name: Configure github runner
-#  ansible.builtin.shell: ./config.sh --url https://github.com/salllman06shaik --token {{ lookup('community.hashi_vault.hashi_vault', 'secret=infra/data/github-runner:RUNNER_TOKEN token={{ vault_token }} url=http://vault-internal.salman06.shop:8200') }} --unattended
-#  args:
-#    chdir: /actions-runner
-#  become: yes
-#  become_user: github
-#  when: not runner_stat.stat.exists
+- name: Check already runner configured status
+  ansible.builtin.stat:
+    path: /actions-runner/.runner
+  register: runner_stat
+
+- name: Configure github runner
+  ansible.builtin.shell: ./config.sh --url https://github.com/salllman06shaik --token {{ lookup('community.hashi_vault.hashi_vault', 'secret=infra/data/github-runner:RUNNER_TOKEN token={{ vault_token }} url=http://vault-internal.salman06.shop:8200') }} --unattended
+  args:
+    chdir: /actions-runner
+  become_user: github
+  when: not runner_stat.stat.exists
 
 #- name: Copy service file
 #  ansible.builtin.template:
