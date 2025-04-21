@@ -1,60 +1,64 @@
 - name: Setup prompt
   ansible.builtin.shell: set-prompt {{ tool_name }}
 
-- name : Create github local user
-  ansible.builtin.user:
-    name: github
-
-- name: Allow github user passwordless sudo
-  ansible.builtin.copy:
-    dest: /etc/sudoers.d/github
-    content: "github ALL=(ALL) NOPASSWD:ALL\n"
-    mode: '0440'
-
-- name : Create github actions folder
-  ansible.builtin.file:
-    path: /actions-runner
-    state: directory
-    owner: github
-    group: github
-
-- name : Download github runner
-  ansible.builtin.unarchive :
-    src: https://github.com/actions/runner/releases/download/v2.323.0/actions-runner-linux-x64-2.323.0.tar.gz
-    dest: /actions-runner
-    owner: github
-    group: github
-    remote_src: yes
-
-
-- name: Install libicu dependency package
-  ansible.builtin.dnf:
-    name: libicu
-    state: installed
-
 - name: Check already runner configured status
   ansible.builtin.stat:
     path: /actions-runner/.runner
   register: runner_stat
 
-- name: Configure github runner
-  ansible.builtin.shell: ./config.sh --url https://github.com/salllman06shaik --token {{ lookup('community.hashi_vault.hashi_vault', 'secret=infra/data/github-runner:RUNNER_TOKEN token={{ vault_token }} url=http://vault-internal.salman06.shop:8200') }} --unattended
-  args:
-    chdir: /actions-runner
-  become_user: github
+- name: GitHub actions
   when: not runner_stat.stat.exists
+  block:
+    - name : Create github local user
+      ansible.builtin.user:
+        name: github
 
-- name: Copy service file
-  ansible.builtin.template:
-    src: github-runner.service
-    dest: /etc/systemd/system/github-runner.service
+    - name: Allow github user passwordless sudo
+      ansible.builtin.copy:
+        dest: /etc/sudoers.d/github
+        content: "github ALL=(ALL) NOPASSWD:ALL\n"
+        mode: '0440'
 
-- name: Start github runner service
-  ansible.builtin.systemd_service:
-    name: github-runner
-    state: started
-    enabled: yes
-    daemon-reload: yes
+    - name : Create github actions folder
+      ansible.builtin.file:
+        path: /actions-runner
+        state: directory
+        owner: github
+        group: github
+
+    - name : Download github runner
+      ansible.builtin.unarchive :
+        src: https://github.com/actions/runner/releases/download/v2.323.0/actions-runner-linux-x64-2.323.0.tar.gz
+        dest: /actions-runner
+        owner: github
+        group: github
+        remote_src: yes
+
+
+    - name: Install libicu dependency package
+      ansible.builtin.dnf:
+        name: libicu
+        state: installed
+
+
+    - name: Configure github runner
+      ansible.builtin.shell: ./config.sh --url https://github.com/salllman06shaik --token {{ lookup('community.hashi_vault.hashi_vault', 'secret=infra/data/github-runner:RUNNER_TOKEN token={{ vault_token }} url=http://vault-internal.salman06.shop:8200') }} --unattended
+      args:
+        chdir: /actions-runner
+      become_user: github
+
+
+    - name: Copy service file
+      ansible.builtin.template:
+        src: github-runner.service
+        dest: /etc/systemd/system/github-runner.service
+
+    - name: Start github runner service
+      ansible.builtin.systemd_service:
+        name: github-runner
+        state: started
+        enabled: yes
+        daemon-reload: yes
 
 - name: Copy hashicorp repo file
   ansible.builtin.template:
