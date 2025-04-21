@@ -55,3 +55,13 @@
     state: started
     enabled: yes
     daemon-reload: yes
+
+- name: Copy hashicorp repo file
+  ansible.builtin.template:
+    src: hashicorp.repo
+    dest: /etc/yum.repos.d/hashicorp.repo
+
+- name: Install Terraform
+  ansible.builtin.dnf:
+    name: terraform
+    state: installed
