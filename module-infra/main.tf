@@ -43,6 +43,7 @@ resource "aws_instance" "tool" {
   tags = {
     Name = var.name
   }
+  iam_instance_profile = aws_iam_instance_profile.main.name
   instance_market_options {
     market_type = "spot"
     spot_options {
