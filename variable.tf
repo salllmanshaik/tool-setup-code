@@ -21,7 +21,7 @@ variable "tools" {
       instance_type = "t3.small"
       port = 443 #dummy port
       iam_policy = {
-        Actions = []
+        Action = []
         Resource = []
       }
     }
