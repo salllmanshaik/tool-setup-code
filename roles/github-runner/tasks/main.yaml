@@ -87,3 +87,24 @@
     mv linux-amd64/helm /bin/helm
   args:
     chdir: /tmp
+
+- name: Get docker repo
+  ansible.builtin.get_url:
+    url: https://download.docker.com/linux/rhel/docker-ce.repo
+    dest: /etc/yum.repos.d/docker.repo
+
+- name: Install Docker
+  ansible.builtin.dnf:
+    name: docker-ce
+    state: installed
+
+- name: Start Docker
+  ansible.builtin.systemd_service:
+    name: docker
+    state: started
+    enabled: yes
+
+- name: Add github user to docker group
+  ansible.builtin.user:
+    name: github
+    groups: docker
