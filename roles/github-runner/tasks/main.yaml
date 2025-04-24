@@ -1,6 +1,11 @@
 - name: Setup prompt
   ansible.builtin.shell: set-prompt {{ tool_name }}
 
+- name: LVM Layout
+  ansible.builtin.include_role:
+    name: common
+    tasks_from: lvm
+
 - name: Check already runner configured status
   ansible.builtin.stat:
     path: /actions-runner/.runner
@@ -108,3 +113,14 @@
   ansible.builtin.user:
     name: github
     groups: docker
+
+- name: Enable Nodejs dnf module
+  ansible.builtin.shell: dnf module disable nodejs -y ; dnf module enable nodejs:20 -y
+
+- name: Install Nodejs
+  ansible.builtin.dnf:
+    name: nodejs
+
+- name: Install Maven
+  ansible.builtin.dnf:
+    name: maven

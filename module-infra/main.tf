@@ -44,6 +44,11 @@ resource "aws_instance" "tool" {
     Name = var.name
   }
   iam_instance_profile = aws_iam_instance_profile.main.name
+
+  root_block_device {
+    volume_size = var.root_block_device
+  }
+
   instance_market_options {
     market_type = "spot"
     spot_options {
@@ -52,6 +57,8 @@ resource "aws_instance" "tool" {
     }
   }
 }
+
+
 
 
 
