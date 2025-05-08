@@ -16,6 +16,7 @@
     name:
       - elasticsearch
       - kibana
+      - logstash
       - nginx
     state: installed
 
@@ -32,4 +33,11 @@
   loop:
     - elasticsearch
     - kibana
+    - logstash
     - nginx
+
+- name: Copy Logstash configuration
+  ansible.builtin.template:
+    src: logstash.conf
+    dest: /etc/logstash/conf.d/logstash.conf
+  notify: Restart Logstash

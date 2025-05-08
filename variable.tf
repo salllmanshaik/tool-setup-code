@@ -35,6 +35,7 @@ variable "tools" {
       ports = {
         elasticsearch = 9200
         kibana = 80
+        logstash = 5044
       }
       root_block_device = 30
       iam_policy = {
