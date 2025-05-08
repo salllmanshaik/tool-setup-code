@@ -6,7 +6,7 @@ variable "name" {}
 
 variable "zone_id" {}
 
-variable "port" {}
+variable "ports" {}
 
 variable "iam_policy" {}
 

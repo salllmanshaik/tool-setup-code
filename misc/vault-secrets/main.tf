@@ -34,6 +34,17 @@ resource "vault_generic_secret" "ssh" {
 EOT
 }
 
+resource "vault_generic_secret" "elasticsearch" {
+  path = "${vault_mount.ssh.path}/elasticsearch"
+
+  data_json = <<EOT
+{
+  "username":   "elastic",
+  "password": "DevOps321"
+}
+EOT
+}
+
 resource "vault_generic_secret" "github-runner" {
   path = "${vault_mount.ssh.path}/github-runner"
 
