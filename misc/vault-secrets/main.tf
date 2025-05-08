@@ -40,7 +40,7 @@ resource "vault_generic_secret" "elasticsearch" {
   data_json = <<EOT
 {
   "username":   "elastic",
-  "password": "DevOps321"
+  "password": "_OtVzVXOk7m_r8AnBFHC"
 }
 EOT
 }
