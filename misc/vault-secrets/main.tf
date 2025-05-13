@@ -145,7 +145,8 @@ resource "vault_generic_secret" "roboshop-dev-shipping" {
 "DB_TYPE" : "mysql",
 "APP_GIT_URL" : "https://github.com/roboshop-devops-project-v3/shipping",
 "DB_USER" : "root",
-"DB_PASS" : "RoboShop@1"
+"DB_PASS" : "RoboShop@1",
+"NEW_RELIC_LINCENSE_KEY"  : ""
 }
 EOT
 }
@@ -161,6 +162,3 @@ resource "vault_generic_secret" "roboshop-dev-user" {
 }
 EOT
 }
-
-
-
