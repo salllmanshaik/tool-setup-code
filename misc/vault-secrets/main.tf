@@ -161,3 +161,6 @@ resource "vault_generic_secret" "roboshop-dev-user" {
 }
 EOT
 }
+
+
+
