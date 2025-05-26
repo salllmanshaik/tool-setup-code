@@ -5,6 +5,6 @@ lv_input:
   - { lv: rootVol,    size: 6 }
   - { lv: swapVol,    size: 2 }
   - { lv: varTmpVol,  size: 2 }
-  - { lv: varVol,     size: 11 }
+  - { lv: varVol,     size: 30 }
 
 disk_name: nvme0n1
